@@ -12,11 +12,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _rememberMe = false;
   @override
   Widget build(BuildContext context) {
-    bool _remeberMe = false;
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(40.0),
         child: Column(
@@ -39,14 +38,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       InputWidget(
                         labelText: "Username",
-                        showText: true,
+                        hideText: false,
+                        fieldIcon: Icons.face,
                       ),
                       SizedBox(
                         height: 50.0,
                       ),
                       InputWidget(
                         labelText: "Password",
-                        showText: false,
+                        hideText: true,
+                        fieldIcon: Icons.lock,
                       ),
                     ],
                   ),
@@ -60,13 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         Checkbox(
-                          // dense: true,
-                          value: _remeberMe,
+                          value: _rememberMe,
                           checkColor: Colors.grey.shade200,
-
                           onChanged: (bool checked) {
                             setState(() {
-                              _remeberMe = checked;
+                              _rememberMe = checked;
                             });
                           },
                         ),

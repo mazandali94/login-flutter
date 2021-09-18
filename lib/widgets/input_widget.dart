@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
   final String labelText;
-  final bool showText;
-  const InputWidget({Key key, this.labelText, this.showText}) : super(key: key);
+  final bool hideText;
+  final IconData fieldIcon;
+  const InputWidget({Key key, this.labelText, this.hideText, this.fieldIcon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,14 @@ class InputWidget extends StatelessWidget {
           height: 10.0,
         ),
         TextField(
-          obscureText: showText,
+          obscureText: hideText,
           decoration: InputDecoration(
+            prefixIcon: Icon(fieldIcon),
             filled: true,
             fillColor: Colors.grey.shade200,
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
           ),
         ),
       ],
