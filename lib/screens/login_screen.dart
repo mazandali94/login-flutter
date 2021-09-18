@@ -102,7 +102,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
-                    // horizontal: 150.0,
                     vertical: 15.0,
                   ),
                   elevation: 0.0,
