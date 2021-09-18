@@ -1,9 +1,17 @@
+import 'package:app2/widgets/input_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   final String screenTitle;
   const LoginScreen({Key key, this.screenTitle}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     bool _remeberMe = false;
@@ -29,66 +37,47 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Username",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          // labelText: "Username",
-                          // border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                        ),
+                      InputWidget(
+                        labelText: "Username",
+                        showText: true,
                       ),
                       SizedBox(
                         height: 50.0,
                       ),
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          // labelText: "Username",
-                          // border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                        ),
+                      InputWidget(
+                        labelText: "Password",
+                        showText: false,
                       ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 15.0,
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: CheckboxListTile(
-                        // dense: true,
-                        title: Text(
+                    Row(
+                      children: [
+                        Checkbox(
+                          // dense: true,
+                          value: _remeberMe,
+                          checkColor: Colors.grey.shade200,
+
+                          onChanged: (bool checked) {
+                            setState(() {
+                              _remeberMe = checked;
+                            });
+                          },
+                        ),
+                        Text(
                           "Remeber me",
                           style: TextStyle(
                             color: Colors.blue,
                             fontSize: 15.0,
                           ),
                         ),
-                        value: _remeberMe,
-                        onChanged: (checked) {
-                          _remeberMe = !_remeberMe;
-                        },
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
+                      ],
                     ),
                     TextButton(
                       onPressed: () {},
@@ -105,9 +94,42 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
             Container(
-              child: ElevatedButton(child: Text("Login"), onPressed: null),
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: ElevatedButton(
+                child: Text(
+                  "Login",
+                  style: TextStyle(fontSize: 25.0),
+                ),
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    // horizontal: 150.0,
+                    vertical: 15.0,
+                  ),
+                  elevation: 0.0,
+                  shadowColor: Colors.transparent,
+                ),
+              ),
             ),
-            Text("Dont have account? create account"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't Have an account? "),
+                InkWell(
+                  onTap: () {
+                    print("Create account pressed");
+                  },
+                  child: Text(
+                    "Create an account.",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),
